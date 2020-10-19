@@ -1,0 +1,85 @@
+RewriteEngine On
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{QUERY_STRING} ! php?.*$ [NC]
+# RewriteRule ^(.*)$ red.php?q=$1 [QSA,L]
+#RewriteCond %{REQUEST_URI} !^/(.*\.php)$ [NC]
+
+RewriteRule ^(.{1,15})$ re.php?q=$1
+
+# /cat/token - redirect
+## RewriteRule ^cat/([0-9a-zA-Z]{32,32})$ edit_cat.php?q=$1
+
+# /cat/show
+## RewriteRule ^cat/show$ show_cat.php
+
+# in/page/token - redirect to /edit/pagename/token
+# /edit/pagename/token
+# /add/pagename/token -
+
+
+# edit/pagename/token
+# show/pagename
+
+# можно типа нет тоена пока
+# /page/token
+# /catalog/token
+
+# RewriteRule ^([a-z]+)/([0-9a-zA-Z_]+)/?$ $1.php?token=$2
+
+# edit cat -----
+RewriteRule ^edit/cat/([_0-9a-zA-Z]+)*$ edit_cat.php?ctoken=$1&sw=1
+# edit cat -----1
+RewriteRule ^edit/cat/([_0-9a-zA-Z]+)*/1$ edit_cat.php?ctoken=$1&sw=1
+# edit cat -----0
+RewriteRule ^edit/cat/([_0-9a-zA-Z]+)*/0$ edit_cat.php?ctoken=$1&sw=0
+
+
+
+# show cat -----
+RewriteRule ^show/cat/([_0-9a-zA-Z]+)*$ show_cat.php?stoken=$1&sw=1
+# show cat -----1
+RewriteRule ^show/cat/([_0-9a-zA-Z]+)*/1$ show_cat.php?stoken=$1&sw=1
+# show cat -----0
+RewriteRule ^show/cat/([_0-9a-zA-Z]+)*/0$ show_cat.php?stoken=$1&sw=0
+
+
+# add cat -----
+RewriteRule ^add/page/([_0-9a-zA-Z]+)*$ add_page.php?ctoken=$1
+
+# edit cat -----
+RewriteRule ^edit/сpage/([_0-9a-zA-Z]+)*$ edit_cat_line.php?ptoken=$1
+
+
+# del cat page -----
+RewriteRule ^del/page/([_0-9a-zA-Z]*)$ del_cat_page.php?ptoken=$1
+
+
+# edit page ----- страница ссылками
+RewriteRule ^edit/page/([_0-9a-zA-Z]+)*$ edit_page.php?ptoken=$1&sw=1
+# edit page -----1
+RewriteRule ^edit/page/([_0-9a-zA-Z]+)*/1$ edit_page.php?ptoken=$1&sw=1
+# edit page -----0
+RewriteRule ^edit/page/([_0-9a-zA-Z]+)*/0$ edit_page.php?ptoken=$1&sw=0
+
+# add link -----
+RewriteRule ^add/link/([_0-9a-zA-Z]+)*$ add_link.php?ptoken=$1
+
+# edit link -----
+RewriteRule ^edit/link/([_0-9a-zA-Z]+)*/([0-9]*)$ edit_link.php?ptoken=$1&id=$2
+
+# show page ----- страница ссылками
+RewriteRule ^show/page/([_0-9a-zA-Z]+)*$ show_page.php?stoken=$1&sw=1
+# show page -----1
+RewriteRule ^show/page/([_0-9a-zA-Z]+)*/1$ show_page.php?stoken=$1&sw=1
+# show page -----0
+RewriteRule ^show/page/([_0-9a-zA-Z]+)*/0$ show_page.php?stoken=$1&sw=0
+# show page -----0
+RewriteRule ^show/page/([_0-9a-zA-Z]+)*/0$ show_page.php?stoken=$1&sw=0
+
+
+
+# svg page -----0
+RewriteRule ^svg/surl/([_0-9a-zA-Z]+)*\.svg$ svg_do.php?surl=$1
